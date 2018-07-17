@@ -34,7 +34,7 @@ def roundInt(num):
     return "NA"
 
 if __name__ == "__main__":
-    csv_file = "./countries.csv"
+    csv_file = "./data/countries.csv"
     countries_df = pd.read_csv(csv_file, keep_default_na=False, na_values=[""])
     countries_df = countries_df.where(countries_df.notnull(), None)
     countries = countries_df.to_dict('records')
