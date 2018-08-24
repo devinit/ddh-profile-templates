@@ -89,12 +89,14 @@ conditional_attribute_count=function(crs,attrib1,attrib2,attrib3){
   valid_combinations = paste(top10_donor_sector[,attrib1, with=F][[1]],top10_donor_sector[,attrib2, with=F][[1]])
   
   p4b_recipient_top1_bundle= subset(p4b_recipient,recipient_sector %in% valid_combinations)
+  p4b_recipient_top1_bundle = subset(p4b_recipient_top1_bundle,usd_disb>0)
   p4b_recipient_top1_bundle = p4b_recipient_top1_bundle[order(p4b_recipient_top1_bundle[,attrib1, with=F],p4b_recipient_top1_bundle[,attrib2, with=F],-p4b_recipient_top1_bundle$usd_disb)]
   p4b_recipient_top1_bundle = p4b_recipient_top1_bundle[,head(.SD,1),by=c(attrib1,attrib2)]
   p4b_recipient_top1_bundle$count = 1
   p4b_recipient_top1_bundle_count = p4b_recipient_top1_bundle[,.(top1count=sum(count)),by=c(attrib1,attrib3)]
   
   p4b_recipient_top3_bundle = subset(p4b_recipient,recipient_sector %in% valid_combinations)
+  p4b_recipient_top3_bundle = subset(p4b_recipient_top3_bundle,usd_disb>0)
   p4b_recipient_top3_bundle = p4b_recipient_top3_bundle[order(p4b_recipient_top3_bundle[,attrib1, with=F],p4b_recipient_top3_bundle[,attrib2, with=F],-p4b_recipient_top3_bundle$usd_disb)]
   p4b_recipient_top3_bundle = p4b_recipient_top3_bundle[,head(.SD,3),by=c(attrib1,attrib2)]
   p4b_recipient_top3_bundle$count = 1
